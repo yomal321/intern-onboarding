@@ -1,0 +1,57 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="qElGxyAiJPsYzexhj4zp">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-1" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="&lt;font style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Student&lt;br&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt;search,&lt;/span&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt; book,&lt;/span&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt; pay,&lt;/span&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt; take video lessons,&lt;/span&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt; and leave ratings.&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-2" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="&lt;font style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Tutor&lt;br&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt;&lt;span class=&quot;&quot;&gt;manage availability,&lt;/span&gt;&lt;span class=&quot;&quot;&gt; accept bookings,&lt;/span&gt;&lt;span class=&quot;&quot;&gt; take video lessons,&lt;/span&gt;&lt;span class=&quot;&quot;&gt; and track earnings&lt;/span&gt;.&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="390" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-3" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="&lt;font style=&quot;&quot;&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;OPS ADMIN&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt;Vets tutor profiles,&lt;/span&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt; manages disputes,&lt;/span&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt; and triggers the payout process&lt;/span&gt;&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="710" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-7" edge="1" parent="1" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="tLLdQRFMvlAvaOpXsNAG-12" value="">
+          <mxGeometry relative="1" width="100" as="geometry">
+            <Array as="points" />
+            <mxPoint x="499.5" y="280" as="sourcePoint" />
+            <mxPoint x="500" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;i style=&quot;line-height: 20%;&quot;&gt;Interacts with the platform to manage lesson scheduling, payments, and user profiles &lt;br&gt;via HTTPS/ Web Browser&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="620" x="190" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;&lt;b&gt;The Central System&amp;nbsp;&lt;br&gt;&lt;/b&gt;&lt;/font&gt;(LearnLanka)&amp;nbsp;" vertex="1">
+          <mxGeometry height="100" width="390" x="305" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-15" edge="1" parent="1" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;" value="">
+          <mxGeometry relative="1" width="100" as="geometry">
+            <Array as="points" />
+            <mxPoint x="499.5" y="640" as="sourcePoint" />
+            <mxPoint x="500" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-16" parent="1" style="whiteSpace=wrap;html=1;dashed=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Payment Gateway&lt;/b&gt;&lt;/font&gt;&lt;br&gt;Card or eZ Cash (PayHere)&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="40" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-17" parent="1" style="whiteSpace=wrap;html=1;dashed=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Video Service&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;div&gt;Real time stream&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="280" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-19" parent="1" style="whiteSpace=wrap;html=1;dashed=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;SMS Gateway&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;div&gt;Alerts &amp;amp; Security&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="520" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="tLLdQRFMvlAvaOpXsNAG-21" parent="1" style="text;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;External&amp;nbsp; APIs to process payments, video sessions, and notifications via&amp;nbsp; REST API / HTTPS&amp;nbsp;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="560" x="215" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="nt1xDG359d4hX5aFLqi5-2" parent="1" style="whiteSpace=wrap;html=1;dashed=1;" value="&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Cloud Service&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;&lt;div&gt;&amp;nbsp;storage (aws,azure)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="760" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="nt1xDG359d4hX5aFLqi5-3" parent="1" style="whiteSpace=wrap;html=1;dashed=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Banking System&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;div&gt;&amp;nbsp;Bank statement weekly/monthly&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="400" y="900" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
