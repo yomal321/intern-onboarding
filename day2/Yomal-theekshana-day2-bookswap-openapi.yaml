@@ -1,0 +1,356 @@
+openapi: 3.1.0
+info:
+  title: BookSwap API
+  version: 0.1.0
+  description: |
+    Backend API for the BookSwap marketplace application, serving neighbors in a Colombo apartment block 
+    to list, search, borrow, and track book loans. All endpoints require a valid Microsoft Entra JWT token.
+    Privacy Guard: Member addresses and phone numbers are strictly excluded from all public schemas.
+
+servers:
+  - url: https://api.bookswap.local
+    description: Local development/mock server
+
+security:
+  - BearerAuth: []
+
+paths:
+  /books:
+    get:
+      summary: List and search books in the building
+      description: Retrieve a paginated list of books with optional filters for title, author, ISBN, or condition.
+      parameters:
+        - name: search
+          in: query
+          required: false
+          description: Search term matching title, author, or ISBN
+          schema:
+            type: string
+        - name: condition
+          in: query
+          required: false
+          description: Filter books by their physical condition
+          schema:
+            type: string
+            enum: [New, Good, Worn, Damaged]
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: pageSize
+          in: query
+          required: false
+          description: Number of records per page
+          schema:
+            type: integer
+            default: 10
+            maximum: 50
+      responses:
+        "200":
+          description: A paginated page of books matching criteria.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookPage'
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+
+    post:
+      summary: Add a new book
+      description: Allows a resident to list a book they own. The photo must be uploaded first to get a URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookCreateInput'
+      responses:
+        "201":
+          description: Book successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+# This zone manages negotiations between neighbors
+  /books/{bookId}/borrow-requests:
+    post:
+      summary: Request to borrow a book
+      description: Creates a pending request to borrow a book. Triggers an asynchronous in-app notification to the owner.
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "201":
+          description: Borrow request successfully submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BorrowRequest'
+        "400":
+          description: Bad request (e.g., trying to borrow your own book or an unavailable book).
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+        "404":
+          description: Book not found.
+
+  /borrow-requests/{requestId}:
+    patch:
+      summary: Accept or decline a borrow request
+      description: Executed by the book owner to update the status of a pending borrow request.
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [Accepted, Declined]
+      responses:
+        "200":
+          description: Request status updated. If accepted, a Loan object is generated automatically.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BorrowRequest'
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+        "403":
+          description: Forbidden. You are not the owner of this book.
+        "404":
+          description: Request not found.
+
+  /books/{bookId}/loans:
+    get:
+      summary: Get borrower history for a book
+      description: Returns a list of past and current loans associated with a specific book.
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A list of loans for the book.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Loan'
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+        "404":
+          description: Book not found.
+
+  /loans/{loanId}:
+    patch:
+      summary: Mark a loan as returned
+      description: Updates an active or overdue loan status to 'Returned'.
+      parameters:
+        - name: loanId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [Returned]
+      responses:
+        "200":
+          description: Loan successfully updated to returned status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+        "400":
+          description: Invalid transition (e.g., loan already closed).
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+        "404":
+          description: Loan record not found.
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Authenticate using Microsoft Entra External ID token.
+
+  responses:
+    400BadRequest:
+      description: Invalid body payload or validation constraint violation.
+    401Unauthorized:
+      description: Missing, expired, or invalid Authorization Bearer token.
+
+  schemas:
+    Book:
+      type: object
+      required:
+        - id
+        - title
+        - author
+        - isbn
+        - condition
+        - photoUrl
+        - isAvailable
+        - ownerId
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        author:
+          type: string
+        isbn:
+          type: string
+          description: International Standard Book Number
+        condition:
+          type: string
+          enum: [New, Good, Worn, Damaged]
+        photoUrl:
+          type: string
+          format: uri
+          description: Public link to file hosted inside Azure Blob Storage
+        isAvailable:
+          type: boolean
+        ownerId:
+          type: string
+          description: Unique profile identifier of the owner (derived securely from JWT)
+
+    BookCreateInput:
+      type: object
+      required:
+        - title
+        - author
+        - isbn
+        - condition
+        - photoUrl
+      properties:
+        title:
+          type: string
+          minLength: 1
+        author:
+          type: string
+          minLength: 1
+        isbn:
+          type: string
+        condition:
+          type: string
+          enum: [New, Good, Worn, Damaged]
+        photoUrl:
+          type: string
+          format: uri
+          description: The Azure Blob storage URL where the user pre-uploaded the book photo (<5MB)
+
+    BorrowRequest:
+      type: object
+      required:
+        - id
+        - bookId
+        - requesterId
+        - status
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        bookId:
+          type: string
+          format: uuid
+        requesterId:
+          type: string
+        status:
+          type: string
+          enum: [Pending, Accepted, Declined]
+        createdAt:
+          type: string
+          format: date-time
+
+    Loan:
+      type: object
+      required:
+        - id
+        - bookId
+        - borrowerId
+        - status
+        - borrowedAt
+        - dueDate
+      properties:
+        id:
+          type: string
+          format: uuid
+        bookId:
+          type: string
+          format: uuid
+        borrowerId:
+          type: string
+        status:
+          type: string
+          enum: [Out, Returned, Overdue]
+        borrowedAt:
+          type: string
+          format: date-time
+        returnedAt:
+          type: string
+          format: date-time
+          nullable: true
+        dueDate:
+          type: string
+          format: date-time
+          description: Auto-calculated target timestamp exactly 30 days past borrowedAt
+
+    BookPage:
+      type: object
+      required:
+        - items
+        - page
+        - pageSize
+        - totalItems
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalItems:
+          type: integer
