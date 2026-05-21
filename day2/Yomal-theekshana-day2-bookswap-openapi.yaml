@@ -376,3 +376,25 @@ components:
           type: integer
         totalItems:
           type: integer
+          
+   MemberProfile:
+      type: object
+      required:
+        - id
+        - fullName
+        - email
+        - joinedAt
+      properties:
+        id:
+          type: string
+          description: Unique system identifier mapped securely from Microsoft Entra External ID.
+        fullName:
+          type: string
+          example: Yomal Theekshana
+        email:
+          type: string
+          format: email
+          example: yomal@example.com
+        joinedAt:
+          type: string
+          format: date-time
