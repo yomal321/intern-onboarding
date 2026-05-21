@@ -141,7 +141,7 @@ paths:
           description: Forbidden. You are not the owner of this book.
         "404":
           description: Request not found.
-
+# Gets the loan history for a specific book, including current and past loans. Useful for owners to track their books and for borrowers to see if a book is frequently borrowed.
   /books/{bookId}/loans:
     get:
       summary: Get borrower history for a book
@@ -166,7 +166,29 @@ paths:
           $ref: '#/components/responses/401Unauthorized'
         "404":
           description: Book not found.
-
+  # Gets the loan history for a specific person, filtered by their unique identifier. 
+  /loans:
+    get:
+      summary: Get loan history filtered by person
+      description: Retrieve historical loan records with the option to filter by a specific borrower's identity string.
+      parameters:
+        - name: borrowerId
+          in: query
+          required: false
+          description: The secure unique identifier of the target neighbor to filter their history.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of book loans belonging to that specific person.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Loan'
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
   /loans/{loanId}:
     patch:
       summary: Mark a loan as returned
