@@ -15,7 +15,25 @@
 
 ---
 
-## 2. SLI / SLO Table
+## 2. SLI Plain-Language Definitions
+
+> **Hint:** Define an SLI in plain language first, then code it.
+
+| # | Plain-language definition | KQL / metric expression |
+|---|---------------------------|-------------------------|
+| 1 | "Is the book search fast enough?" — out of every 100 search requests, how many came back in under 800 ms? | `requests \| where name == "GET /books" \| summarize sli = countif(duration <= 800) * 100.0 / count()` |
+| 2 | "Does listing a book actually work?" — out of every 100 attempts to add a book, how many succeeded without a server error? | `requests \| where name == "POST /books" \| summarize sli = countif(resultCode !startswith "5") * 100.0 / count()` |
+| 3a | "Does the API turn away strangers?" — out of every 100 requests arriving without a valid token, how many were correctly rejected with 401? | `requests \| where tobool(customDimensions.hasValidToken) == false \| summarize sli = countif(resultCode == "401") * 100.0 / count()` |
+| 3b | "Does the API refuse stale passes?" — out of every 100 accepted tokens, how many were issued within the last 60 minutes? | `requests \| where isnotempty(customDimensions.jwt_age_seconds) \| summarize sli = countif(toint(customDimensions.jwt_age_seconds) <= 3600) * 100.0 / count()` |
+| 4 | "Is the listings page reachable right now?" — out of every 100 synthetic pings, how many got a healthy response within 5 seconds? | `availabilityResults \| summarize sli = countif(success == 1) * 100.0 / count()` |
+| 5 | "Did we write down what happened?" — out of every 100 auditable events, how many produced a log entry with both a request ID and a member ID? | `AppTraces \| where Properties.eventType in ("LoanCreated","LoanReturned","AuthFailure") \| summarize sli = countif(isnotempty(Properties.requestId) and isnotempty(Properties.memberId)) * 100.0 / count()` |
+| 6 | "Does listing still work when everyone is online?" — same as SLI 2 but only during 10× traffic windows | Same KQL as SLI 2, filtered to hours where request count exceeds 10× the 28-day median hourly count |
+| 7 | "Does search degrade gracefully when the cache is down?" — out of every 100 search requests while Redis was unhealthy, how many still returned a valid result? | `requests \| where name == "GET /books" and tobool(customDimensions.cacheAvailable) == false \| summarize sli = countif(resultCode startswith "2") * 100.0 / count()` |
+| 8 | "Did any member see someone else's records?" — out of every 100 loan-history responses, how many leaked a foreign member ID? | `customEvents \| where name == "PrivacyViolation" \| count` — target is always 0; any non-zero result is a severity-1 incident |
+
+---
+
+## 3. SLI / SLO Table
 
 | # | SLI definition | Measurement source | SLO target | Window | Error budget |
 |---|----------------|--------------------|------------|--------|--------------|
@@ -31,7 +49,7 @@
 
 ---
 
-## 3. Error Budget Policy
+## 4. Error Budget Policy
 
 ### When a budget is exhausted (or forecast to exhaust before window end)
 
@@ -53,6 +71,6 @@ The **on-call engineer** declares budget exhaustion and initiates the freeze. Li
 
 ---
 
-## 4. Out of Budget Right Now
+## 5. Out of Budget Right Now
 
 **SLI 7 (cache-fallback search correctness)** is the one we almost certainly cannot meet today — the OpenAPI spec and Day 2 architecture have no documented fallback path from Redis to direct Azure SQL query, so a Redis outage right now would cause `GET /books` to return 500s until the cache is manually flushed or the service restarted, violating the zero-tolerance target on day one.
