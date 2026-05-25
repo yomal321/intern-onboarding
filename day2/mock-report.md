@@ -112,5 +112,3 @@ In Test 3, POST to `/books/497f6eca.../borrow-requests` returned a BorrowRequest
 2. **Document that `BorrowRequest.bookId` is derived from the path parameter** (BorrowRequest schema, ~line 185). Add a `description` such as *"Matches the `bookId` path parameter from the originating request"* and align the path-level example UUID with the schema example to prevent consumer confusion.
 
 3. **Add a `403` response to `GET /books/{bookId}/loans`** (~line 80). The endpoint exposes borrower identity (`borrowerId`). Given the stated privacy-first design, a non-owner accessing another member's loan history should receive `403 Forbidden` — this case is currently undocumented.
-
-4. **Add a `401` example showing the missing-token response body** (global `401Unauthorized` component response, ~line 220). The spec declares `BearerAuth` globally but provides no example of what the 401 body looks like, making it harder for frontend teams to handle auth errors correctly.
