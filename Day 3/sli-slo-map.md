@@ -73,9 +73,7 @@ Change freeze on the App Service and Front Door configuration. All deployments r
 **SLI 5 — Audit log completeness budget exhausted:**
 The logging pipeline is treated as a production incident. No loan creation or return operations are accepted until logging is confirmed healthy — the affected endpoints return `503 Service Unavailable` with a `Retry-After` header rather than silently drop audit events.
 
-### Who owns the decision
 
-The **on-call engineer** declares budget exhaustion and initiates the freeze. Lifting the freeze requires sign-off from the **engineering lead**. For SLIs 3b and 8 (zero-tolerance), the **security lead** is paged immediately regardless of time of day.
 
 ---
 
