@@ -15,23 +15,6 @@
 
 ---
 
-## 2. SLI Plain-Language Definitions
-
-> **Hint:** Define an SLI in plain language first, then code it.
-
-| # | Plain-language definition | KQL / metric expression |
-|---|---------------------------|-------------------------|
-| 1 | "Is the book search fast enough?" — out of every 100 search requests, how many came back in under 800 ms? | `requests \| where name == "GET /books" \| summarize sli = countif(duration <= 800) * 100.0 / count()` |
-| 2 | "Does listing a book actually work?" — out of every 100 attempts to add a book, how many succeeded without a server error? | `requests \| where name == "POST /books" \| summarize sli = countif(resultCode !startswith "5") * 100.0 / count()` |
-| 3a | "Does the API turn away strangers?" — out of every 100 requests arriving without a valid token, how many were correctly rejected with 401? | `requests \| where tobool(customDimensions.hasValidToken) == false \| summarize sli = countif(resultCode == "401") * 100.0 / count()` |
-| 3b | "Does the API refuse stale passes?" — out of every 100 accepted tokens, how many were issued within the last 60 minutes? | `requests \| where isnotempty(customDimensions.jwt_age_seconds) \| summarize sli = countif(toint(customDimensions.jwt_age_seconds) <= 3600) * 100.0 / count()` |
-| 4 | "Is the listings page reachable right now?" — out of every 100 synthetic pings, how many got a healthy response within 5 seconds? | `availabilityResults \| summarize sli = countif(success == 1) * 100.0 / count()` |
-| 5 | "Did we write down what happened?" — out of every 100 auditable events, how many produced a log entry with both a request ID and a member ID? | `AppTraces \| where Properties.eventType in ("LoanCreated","LoanReturned","AuthFailure") \| summarize sli = countif(isnotempty(Properties.requestId) and isnotempty(Properties.memberId)) * 100.0 / count()` |
-| 6 | "Does listing still work when everyone is online?" — same as SLI 2 but only during 10× traffic windows | Same KQL as SLI 2, filtered to hours where request count exceeds 10× the 28-day median hourly count |
-| 7 | "Does search degrade gracefully when the cache is down?" — out of every 100 search requests while Redis was unhealthy, how many still returned a valid result? | `requests \| where name == "GET /books" and tobool(customDimensions.cacheAvailable) == false \| summarize sli = countif(resultCode startswith "2") * 100.0 / count()` |
-| 8 | "Did any member see someone else's records?" — out of every 100 loan-history responses, how many leaked a foreign member ID? | `customEvents \| where name == "PrivacyViolation" \| count` — target is always 0; any non-zero result is a severity-1 incident |
-
----
 
 ## 3. SLI / SLO Table
 
@@ -46,6 +29,31 @@
 | 6 | **Listing creation error rate under spike** — proportion of `POST /books` requests that return 5xx during any 4-hour window where RPS is ≥ 10× the 28-day median RPS | Application Insights — same as SLI 2, windowed to spike periods identified by `requests` count > 10× p50 hourly rate | ≤ 0.1% 5xx during spike window | Per spike event (4-hour window) | Same absolute budget as SLI 2; spike window is evaluated separately to surface degradation that averages away |
 | 7 | **Cache-fallback search correctness** — proportion of `GET /books` requests that return a valid (non-empty schema-conformant) response body regardless of Redis availability | Application Insights — custom dimension `cacheHit` on search responses; ratio of valid 2xx responses to total requests, filtered to periods where Redis dependency calls show `success = false` | 100% of search requests return a valid response during Redis unavailability | Rolling 28 days | Zero tolerance — a search returning 500 because Redis is down is a design defect, not a budget item |
 | 8 | **Privacy isolation** — proportion of `GET /loans` or `GET /books/{id}/loans` responses where the returned `borrowerId` values include any member ID other than the authenticated caller's own ID (for borrower-scoped queries) | Application Insights — custom event `PrivacyViolation` emitted by the authorisation middleware on any mismatch; count of such events | 0 privacy violations | Rolling 28 days | Zero tolerance — any single violation is a severity-1 incident; budget concept does not apply |
+
+### Application Insights query for SLI 1
+
+```kusto
+requests
+| where timestamp > ago(28d)
+| where name == "GET /books"
+| summarize
+    good  = countif(success == true and duration < 800),
+    total = count()
+| extend sli = 100.0 * good / total
+```
+
+### Application Insights query for SLI 2
+
+```kusto
+requests
+| where timestamp > ago(28d)
+| where name == "POST /books"
+| summarize
+    good  = countif(toint(resultCode) < 500),
+    total = count()
+| extend sli = 100.0 * good / total
+
+```
 
 ---
 
