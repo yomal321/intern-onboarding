@@ -1,0 +1,168 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="21.0.0">
+  <diagram name="GreenChit Container Diagram" id="greenchit-container">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- BACKGROUND -->
+        <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0d1117;strokeColor=none;zIndex=-1;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1400" height="1100" as="geometry" />
+        </mxCell>
+
+        <!-- TITLE -->
+        <mxCell id="title" value="GreenChit — C4 Level 2 Container Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="1000" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="BISTEC Internal Reimbursement Tool" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontColor=#aaaaaa;" vertex="1" parent="1">
+          <mxGeometry x="200" y="55" width="1000" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== ROW 1: Person + Web App + Claims API + Blob ==================== -->
+
+        <!-- Staff / Manager (Person) -->
+        <mxCell id="person" value="" style="shape=mxgraph.archimate3.actor;fillColor=#1a3a5c;strokeColor=#4a9eda;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="50" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="personlabel" value="&lt;b&gt;Staff / Manager&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px;color:#aaaaaa&apos;&gt;[Person]&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="30" y="235" width="110" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Web App -->
+        <mxCell id="webapp" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Web App&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;React SPA&lt;br&gt;Azure Static Web Apps&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a4a7c;strokeColor=#4a9eda;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="230" y="155" width="190" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Claims API -->
+        <mxCell id="api" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Claims API&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;Node.js / Express&lt;br&gt;Azure App Service P2v3&lt;br&gt;REST API&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d6a3a;strokeColor=#2ecc71;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="145" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Blob Storage -->
+        <mxCell id="blob" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Blob Storage&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;Azure Blob Storage&lt;br&gt;Receipt files · Signed URLs&lt;br&gt;Up to 10 MB per file&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7c3a1a;strokeColor=#f5a623;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="145" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== ROW 2: Database ==================== -->
+
+        <!-- Database -->
+        <mxCell id="db" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Database&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;Azure SQL — General Purpose&lt;br&gt;Claims · Audit · Claimants&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6b21a8;strokeColor=#a855f7;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="360" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== ROW 3: Notif Worker + Queue + Export Worker ==================== -->
+
+        <!-- Notif Worker -->
+        <mxCell id="notifworker" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Notif. Worker&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;Azure Function (consumption)&lt;br&gt;Teams card · Email fallback&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d6a3a;strokeColor=#2ecc71;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="230" y="570" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Queue -->
+        <mxCell id="queue" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Queue&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;Azure Service Bus Standard&lt;br&gt;Notifications · Export jobs&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0e7490;strokeColor=#22d3ee;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="570" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Export Worker -->
+        <mxCell id="exportworker" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Export Worker&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;Azure Function (consumption)&lt;br&gt;CSV → SharePoint via Graph&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3d3d1a;strokeColor=#a3a320;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="830" y="570" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== ROW 4: Identity ==================== -->
+
+        <!-- Identity -->
+        <mxCell id="identity" value="&lt;font style=&apos;font-size:9px;color:#aaaaaa&apos;&gt;[Container]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Identity&lt;/b&gt;&lt;br&gt;&lt;font style=&apos;font-size:10px&apos;&gt;Microsoft Entra ID&lt;br&gt;BISTEC tenant · JWT issuance&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3b3b3b;strokeColor=#888888;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="790" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEGEND ==================== -->
+        <mxCell id="legend" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#161b22;strokeColor=#444444;fontColor=#ffffff;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="30" y="800" width="260" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="legendtitle" value="&lt;b&gt;LEGEND&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontColor=#ffffff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="45" y="810" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#4a9eda;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry x="45" y="840" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="45" y="840" as="sourcePoint" />
+            <mxPoint x="100" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l1label" value="Synchronous (HTTPS / SQL)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontColor=#aaaaaa;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="110" y="830" width="170" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f5a623;strokeWidth=2;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="45" y="865" as="sourcePoint" />
+            <mxPoint x="100" y="865" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l2label" value="Async queue message (AMQP)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontColor=#aaaaaa;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="110" y="855" width="170" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#a855f7;strokeWidth=2;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="45" y="893" as="sourcePoint" />
+            <mxPoint x="100" y="893" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l3label" value="JWT validation (HTTPS)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontColor=#aaaaaa;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="110" y="883" width="170" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== ARROWS ==================== -->
+
+        <!-- Person → Web App -->
+        <mxCell id="e1" value="uses / HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#4a9eda;fontColor=#4a9eda;fontSize=10;strokeWidth=2;" edge="1" source="person" target="webapp" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Web App → Claims API (sync) -->
+        <mxCell id="e2" value="REST / HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#4a9eda;fontColor=#4a9eda;fontSize=10;strokeWidth=2;" edge="1" source="webapp" target="api" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Web App → Blob (direct PUT SAS) -->
+        <mxCell id="e3" value="direct PUT (SAS) / HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;strokeWidth=2;dashed=1;" edge="1" source="webapp" target="blob" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="325" y="130" />
+              <mxPoint x="960" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Claims API → Blob (issues SAS URL) -->
+        <mxCell id="e4" value="issues SAS URL / HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;strokeWidth=2;" edge="1" source="api" target="blob" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Claims API → Database (reads+writes) -->
+        <mxCell id="e5" value="reads+writes / SQL·TDS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#4a9eda;fontColor=#4a9eda;fontSize=10;strokeWidth=2;" edge="1" source="api" target="db" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Database → Queue (publishes event AMQP) -->
+        <mxCell id="e6" value="publishes event / AMQP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;strokeWidth=2;dashed=1;" edge="1" source="db" target="queue" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Queue → Notif Worker (consumes AMQP) -->
+        <mxCell id="e7" value="consumes / AMQP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;strokeWidth=2;dashed=1;" edge="1" source="queue" target="notifworker" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Queue → Export Worker (consumes AMQP) -->
+        <mxCell id="e8" value="consumes / AMQP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;strokeWidth=2;dashed=1;" edge="1" source="queue" target="exportworker" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Queue → Identity (validates JWT) -->
+        <mxCell id="e9" value="validates JWT / HTTPS JWKS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#a855f7;fontColor=#a855f7;fontSize=10;strokeWidth=2;dashed=1;" edge="1" source="queue" target="identity" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

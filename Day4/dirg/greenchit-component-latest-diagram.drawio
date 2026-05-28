@@ -1,0 +1,103 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram name="GreenChit Component Diagram" id="greenchit-component">
+    <mxGraphModel dx="1549" dy="851" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#ffffff;" value="GreenChit — C4 Level 3 Component Diagram: Claims API" vertex="1">
+          <mxGeometry height="40" width="900" x="300" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#aaaaaa;" value="Internal components of the Azure App Service (Node.js / Express)" vertex="1">
+          <mxGeometry height="25" width="900" x="300" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="bg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0d1117;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="1000" width="1500" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="shape=mxgraph.archimate3.actor;fillColor=#1a3a5c;strokeColor=#4a9eda;fontColor=#ffffff;fontSize=11;fontStyle=1;whiteSpace=wrap;rounded=1;arcSize=10;" value="" vertex="1">
+          <mxGeometry height="100" width="140" x="60" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="webapp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a3a5c;strokeColor=#4a9eda;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[External]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Web App&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;React SPA&lt;br&gt;Azure Static Web Apps&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="40" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="sql" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6b21a8;strokeColor=#a855f7;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[External]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Azure SQL&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Claims + Audit schema&lt;br&gt;Persists all data&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="40" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d1f35;strokeColor=#2ecc71;fontColor=#2ecc71;fontSize=13;verticalAlign=top;arcSize=3;strokeWidth=2;dashed=1;dashPattern=8 4;" value="«Azure App Service» Claims API" vertex="1">
+          <mxGeometry height="780" width="860" x="280" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a4a7c;strokeColor=#4a9eda;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Auth Middleware&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;express-jwt + Entra JWKS&lt;br&gt;Validates JWT on every route&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="570" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="claims" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d6a3a;strokeColor=#2ecc71;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Claims Controller&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Express Router /claims&lt;br&gt;CRUD + ownership check&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="370" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="receipt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7c4a1a;strokeColor=#f5a623;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Receipt Orchestrator&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Signed URL generator&lt;br&gt;SAS PUT URL · size/type check&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="590" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="export" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3d3d1a;strokeColor=#a3a320;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Export Controller&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Express Router /export&lt;br&gt;Finance-only · 202 Accepted&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="810" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="approval" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6b21a8;strokeColor=#a855f7;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Approval Engine&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;State machine (pure fn)&lt;br&gt;Draft→Submit→Approved/Rejected&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="370" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2d3d1a;strokeColor=#a3a320;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Audit Writer&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Append-only DB client&lt;br&gt;INSERT-only · audit schema&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="590" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="notif" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d6a3a;strokeColor=#2ecc71;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Notif. Publisher&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Service Bus SDK&lt;br&gt;Publishes claim events async&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="810" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="health" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3b3b3b;strokeColor=#888888;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[Component]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Health Controller&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Express Router&lt;br&gt;/health · /health/db&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="590" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="blob" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7c3a1a;strokeColor=#f5a623;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[External]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Blob Storage&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Azure Blob Storage&lt;br&gt;Stores receipt files&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="1230" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="bus" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0e7490;strokeColor=#22d3ee;fontColor=#ffffff;fontSize=11;arcSize=10;strokeWidth=2;" value="&lt;font style=&#39;font-size:9px;color:#aaaaaa&#39;&gt;[External]&lt;/font&gt;&lt;br&gt;&lt;b&gt;Service Bus&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Azure Service Bus&lt;br&gt;Async message broker&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="1230" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#4a9eda;fontColor=#4a9eda;fontSize=10;" target="webapp" value="uses via HTTPS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="webapp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4a9eda;fontColor=#4a9eda;fontSize=10;" target="auth" value="all requests via HTTPS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="auth" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2ecc71;fontColor=#2ecc71;fontSize=10;" target="claims" value="passes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="auth" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;" target="receipt" value="passes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="auth" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#a3a320;fontColor=#a3a320;fontSize=10;" target="export" value="passes finance role">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="claims" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#a855f7;fontColor=#a855f7;fontSize=10;" target="approval" value="validates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="receipt" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;" target="audit" value="writes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="export" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#a3a320;fontColor=#a3a320;fontSize=10;dashed=1;" target="notif" value="enqueues job">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="approval" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;strokeColor=#a855f7;fontColor=#a855f7;fontSize=10;" target="sql" value="persists state / SQL·TDS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="audit" style="rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.563;exitY=1.042;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;strokeColor=#a3a320;fontColor=#a3a320;fontSize=10;exitPerimeter=0;" target="sql" value="inserts audit / SQL·TDS">
+          <mxGeometry relative="1" x="0.245" y="85" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="703" y="680" />
+              <mxPoint x="590" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="receipt" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#f5a623;fontColor=#f5a623;fontSize=10;" target="blob" value="issues SAS URL / HTTPS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="notif" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#22d3ee;fontColor=#22d3ee;fontSize=10;dashed=1;" target="bus" value="publishes / AMQP">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
