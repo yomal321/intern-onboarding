@@ -2,7 +2,7 @@
 
 ## 1. NFR Inventory
 
-| # | NFR (from Day 2 + Day 3) | User-visible behaviour |
+| # | NFR  | User-visible behaviour |
 |---|--------------------------|------------------------|
 | 1 | Catalogue search: 99% of requests under 800 ms over a rolling 28 days, even at 10× normal RPS | Member searches for a book and gets results without a noticeable wait |
 | 2 | Listing creation: 99.9% success rate; failed attempts must be retryable without creating duplicates | Member lists a book and it appears in the catalogue; retrying a failed request never creates a ghost duplicate |
